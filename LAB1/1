@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset = "utf-8">
+        <title>Sarang Choi Introduction</title>
+
+    </head>
+
+    <body>
+        <h1>Introducing: Sarang Choi</h1>
+        <h2>이름: 최사랑</h2>
+        <h2>학번: 2022148064</h2>
+        <!-- Brief Introduction of Myself -->
+
+        <h4>Sarang's Hobbies:</h4>
+        <ul>
+            <li>Listening to Music</li>
+            <li>Going to the GYM</li>
+            <li>Taking a Walk</li>
+        </ul>
+
+        <h4>Favorite Songs:</h4>
+
+        <!-- Create an Unordered List with the Links of the Songs -->
+        <ul>
+            <li><a href = "https://www.youtube.com/watch?v=ghrlZIMDzbM&list=PLLb9E1AJahlwrbTvSzyJeMagkEWUqY776&index=1">Newjeans - HypeBoy</a></li>
+            <li><a href = "https://www.youtube.com/watch?v=J_ub7Etch2U">Sam Smith - Too Good At Goodbyes</a></li>
+            <li><a href = "https://www.youtube.com/watch?v=e-qY_UEOWD4">Why Don't We - Unbelievable</a></li>
+        </ul>
+        
+        <!-- Images of the Flags side by side -->
+        <h4>Countries I Have Lived In:</h4>
+        <p>
+            <img src = "korean-flag.jpg" width = "20%" height = "20%" alt = "Korean Flag">
+            <img src = "america_flag.png" width = "20%" height = "120%" alt = "American Flag">
+            <img src = "indonesian_flag.jpg" width = "20%" height = "10%" alt = "Indonesian Flag">
+        </p>
+
+        <!-- Create a Table -->
+        <h4>A Little Bit More About Sarang</h4>
+
+        <table border = "1">
+            <caption>Sarang's "Favorites"</caption>
+
+            <thead>
+                <tr>
+                    <!-- Use Rowspan to Merge Rows -->
+                    <th colspan = "4">
+                        <strong>What are Sarang's Favorites?</strong>
+                    </th>
+                </tr>
+
+                <tr>
+                    <th>
+                        <strong>Type</strong>
+                    </th>
+
+                    <th><strong>What?</strong></th>
+
+                    <th>
+                        <strong>Why?</strong>
+                    </th>
+
+                    <th><strong>Since when?</strong></th>
+                </tr>
+            </thead>
+
+            <tbody>
+                
+                <!-- First Row -->
+                <tr>
+                    <th>Favorite Animal</th>
+                    <td>Cat</td>
+                    <td>Their paws are extremely cute.</td>
+                    <td>Ever since I have met my friend's cat, I have fallen in love with them.</td>
+                </tr>
+
+                <!-- Second Row -->
+                <tr>
+                    <th>Favorite Sport</th>
+                    <td>Basketball</td>
+                    <td>Being able to control a ball with hands and legs, not to mention the scoring method, makes it enjoyable.</td>
+                    <td>When I went to the basketball tryouts in 8th grade, I realized this was my sport.</td>
+                </tr>
+
+                <!-- Third Row -->
+                <tr>
+                    <th rowspan = "2">Favorite Food</th>
+                    <td>Pasta</td>
+                    <td>I personally enjoy cream and cheese, which makes the perfect sauce for pasta noodle.</td>
+                    <td>I loved it ever since my mom cooked me tomato sauce pasta in elementary.</td>
+                </tr>
+
+                <tr>
+                    <td>Pizza</td>
+                    <td>The cheese and the toppings make pizza just the perfect food for me.</td>
+                    <td>When I tried pepperoni pizza in elementary school field day, I began to love it.</td>
+                </tr>
+            </tbody>
+        </table>
+
+
+    </body>
+</html>
