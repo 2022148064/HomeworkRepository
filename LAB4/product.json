@@ -1,0 +1,57 @@
+[
+    {
+        "name" : "vaseline",
+        "price" : 2.99,
+        "image" : "vaseline.jpg",
+        "type" : "lipbalm"
+    },
+
+    {
+        "name" : "nivea",
+        "price" : 1.99,
+        "image" : "nivea.jpg",
+        "type" : "lipbalm"
+    },
+
+    {
+        "name" : "coach",
+        "price" : 29.99,
+        "image" : "perfume1.jpeg",
+        "type" : "perfume"
+    },
+
+    {
+        "name" : "blue perfume",
+        "price" : 39.99,
+        "image" : "perfume2.jpeg",
+        "type" : "perfume"
+    },
+
+    {
+        "name" : "blue bottle",
+        "price" : 25.99,
+        "image" : "bluebottle.png",
+        "type" : "tumbler"
+    },
+
+    {
+        "name" : "hydroflask",
+        "price" : 49.99,
+        "image" : "hydroflask.jpg",
+        "type" : "tumbler"
+    },
+
+    {
+        "name" : "iphone 13",
+        "price" : 799,
+        "image" : "iphone13.jpg",
+        "type" : "phone"
+    },
+
+    {
+        "name" : "galaxy a 53",
+        "price" : 399,
+        "image" : "bluegalaxy.png",
+        "type" : "phone"
+    }
+]

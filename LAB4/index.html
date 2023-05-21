@@ -1,0 +1,318 @@
+<!-- Main page of the website -->
+
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Love's Internet Programming Shop</title>
+
+        <!-- Link to main.css file -->
+        <link rel = "stylesheet" type = "text/css" href = "main.css">
+
+        <!-- Include the JS part of the program -->
+        <script>
+            let sResult = [];
+            let cResult = [];
+            let key = "";
+            let c = "";
+
+            document.addEventListener("DOMContentLoaded", load);
+
+            let count = 1;
+
+            function load() {
+                fetch('product.json')
+                    .then(function(response)
+                    {
+                        return response.json();
+                    }) 
+                    .then(function(json)
+                    {
+                        goProduct = json.slice(0, count);
+                        sResult = goProduct;
+                        const sBtn = document.getElementById("searched");
+                        const main = document.getElementById("main");
+
+                        displayUpdate();
+                        sBtn.addEventListener("click", searched);
+                    })
+                    .catch(function(error)
+                    {
+                        console.log(error);
+                    })
+            };
+            
+            function searched(someEvent)
+            {
+                someEvent.preventDefault();
+                count = 1;
+
+                fetch('product.json')
+                    .then(function(response)
+                    {
+                        return response.json();
+                    }) 
+                    .then(function(json)
+                    {
+                        goProduct = json.slice(0, count);
+                        sResult = goProduct;
+                        const sBtn = document.getElementById("searched");
+                        const main = document.getElementById("main");
+
+                        displayUpdate();
+                        sBtn.addEventListener("click", searched);
+                    })
+                    .catch(function(error)
+                    {
+                        console.log(error);
+                    })
+                
+                sResult = [];
+                cResult = [];
+                key = document.getElementById("key").value;
+                c = document.getElementById("c").value;
+
+                if (c == "" || c == "everything")
+                {
+                    cResult = goProduct;
+                }
+                else
+                {
+                    cResult = goProduct.filter(goitem => goitem.type == c);
+                }
+
+                if (key == "")
+                {
+                    sResult = cResult;
+
+                }
+                else
+                {
+                    sResult = cResult.filter(goitem => goitem.title.includes(key))
+
+                }
+
+                pUpdate();
+
+            };
+
+            function pUpdate()
+            {
+                while(main.firstChild)
+                {
+                    main.removeChild(main.firstChild);
+            
+                }
+                for (const goitem of sResult)
+                {
+                    const getUrl = 'images/${goitem.posterImg}';
+                    goImage(getUrl, goitem)
+                }
+            };
+
+            function goImage(getUrl, goitem)
+            {
+                fetch(getUrl)
+                .then(response => {
+                    if(!response.ok)
+                    {
+                        throw new Error(`HTTP error: ${response.status}`);
+                    }
+                    return response.blob();
+
+                })
+                .then(blob => seeItem(blob, goitem))
+                .catch(error => console.log(error));
+            };
+
+            function seeItem(blob, goitem)
+            {
+                const div = document.createElement("div");
+                const p = document.createElement("p");
+                const img = document.createElement("img");
+                const imageUrl = URL.createObjectURL(blob);
+
+                div.setAttribute("class", "flexibleContainerContentsColumns goitem");
+                p.textContent = "Title: " + goitem.title;
+                img.src = imageUrl;
+                img.alt = goitem.title;
+
+                main.appendChild(div);
+                div.appendChild(img);
+                div.appendChild(p);
+                
+            };
+
+            // Infinite Scroll
+            window.onscroll = () => {
+                if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+                    load();
+                }
+                fetch('product.json')
+                .then(response => response.json())
+                .then(function(json) {
+                    let goProduct = json;
+                    appendItem(goProduct);
+                })
+                .catch(function(error)
+                {
+                    console.log(error);
+                })
+            };
+            
+            function appendItem(goProduct)
+            {
+                if (count < 8)
+                {
+                    goitem = goProduct[count];
+                    if (c == "" || c == "everything")
+                    {
+                        if(goitem.title.includes(key) || key == "")
+                        {
+                            const getUrl = `images/${goitem.posterImg}`;
+                            goImage(getUrl, goitem);
+                        }
+                    }
+
+                    count = count + 1;
+                }
+            };
+
+            div.addEventListener("click", elemClicked);
+
+            // When images are clicked
+            function elemClicked() {
+                document.getElementsByClassName("overContainer")
+            };
+
+
+        </script>
+
+    </head>
+
+    <body>
+        <!-- Header and Animation -->
+        <h1 class = "headerAnimation">[LIPS]</h1>
+        <h2>Love's Internet Programming Shop</h2>
+
+        <!-- Navigation Linking -->
+        <div class = "flexibleContainerSignLogin">
+            <a href = "signup.html"><button class = "buttonSpace">Sign Up</button></a>
+            <a href = "login.html"><button class = "buttonSpace">Login</button></a>
+            <a href = "index.html"><button class = "buttonSpace">Main Page</button></a>
+        </div>
+
+        <!-- Line Break -->
+        <br/>
+
+        <!-- Division of Titles: Vertical(Column) -->
+        <div class = "flexibleContainerTitlesOn">
+
+            <!-- Division of Titles with Contents: Vertical(Column) -->
+            <div class = "flexibleContainerTitleContents">
+                <h3>Objets</h3>
+                
+                <!-- Division of Columns: Horizontal(Rows) -->
+                <div class = "flexibleContainerContentsColumns">
+
+                    <aside>
+                        <form>
+                            <div> <!-- Choosing the Category -->
+                                <input name = "key" id = "key" type = "text" list = "categories">
+                                <label for = "category">Choose a Category:</label>
+                                <select id = "category">
+                                    <option selected>All</option>
+                                    <option>Lipbalm</option>
+                                    <option>Perfume</option>
+                                    <option>Tumbler</option>
+                                    <option>Phone</option>
+                                </select>
+                            </div>
+
+                            <div> <!-- Searching Categories -->
+                                <label for = "searchName">Enter Search Term:</label>
+                                <input type = "text" id = "key" placeholder = "e.g. phone">
+                            </div>
+
+                            <div> <!-- Choosing a Sort -->
+                                <label for = "sortingCategory">Choose a Sort:</label>
+                                <select id = "sortCategory">
+                                    <option selected>None</option>
+                                    <option>By Price</option>
+                                    <option>By Alphabetical Order</option>
+                                </select>
+                            </div>
+
+                            <div> <!-- Filtering Results -->
+                                <button>Filter Results</button>
+                            </div>
+                        </form>
+                    </aside>
+
+                    <!-- Division of Images: Horizontal(Rows) -->
+                    <div class = "flexibleContainerHorizonImage">
+                        <div class = "overContainer" onclick = "elemClicked()">
+                            <img src = "vaseline.png" width = "100%" alt = "Vaseline" class = "imgContain">
+                            <div><p>Vaseline</p></div>
+                        </div>
+                        
+                        <div class = "overContainer" onclick = "elemClicked()">
+                            <img src = "nivea.png" width = "100%" alt = "Nivea" class = "imgContain">
+                            <div><p>Nivea</p></div>
+                        </div>
+                    </div>
+
+                    <div class = "flexibleContainerHorizonImage">
+                        <div class = "overContainer" onclick = "elemClicked()">
+                            <img src = "perfume1.jpeg" width = "80%" alt = "Coach Cologne" class = "imgContain">
+                            <div><p>Cologne1</p></div>
+                        </div>
+
+                        <div class = "overContainer" onclick = "elemClicked()">
+                            <img src = "perfume2.jpg" width = "100%" alt = "Perfume Bottle" class = "imgContain">
+                            <div><p>Cologne2</p></div>
+                        </div>
+                    </div>
+    
+                    <div class = "flexibleContainerHorizonImage">
+                        <div class = "overContainer" onclick = "elemClicked()">
+                            <img src = "bluebottle.png" width = "100%" alt = "Blue Bottle" class = "imgContain">
+                            <div><p>BlueBottle</p></div>
+                        </div>
+                        <div class = "overContainer" onclick = "elemClicked()">
+                            <img src = "hydroflask.jpg" width = "100%" alt = "HydroFlask" class = "imgContain">
+                            <div><p>HydroFlask</p></div>
+                        </div>
+                    </div>  
+    
+                    <div class = "flexibleContainerHorizonImage" onclick = "elemClicked()">
+                        <div class = "overContainer">
+                            <img src = "iphone13.jpg" width = "100%" alt = "Iphone 13" class = "imgContain">
+                            <div><p>Iphone13</p></div>
+                        </div>
+                        <div class = "overContainer" onclick = "elemClicked()">
+                            <img src = "bluegalaxy.png" width = "100%" alt = "Galaxy A 53" class = "imgContain">
+                            <div><p>GalaxyA53</p></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <br/>
+
+            <div class = "flexibleContainerTitleContents">
+                <div class = "finalSection">
+                    <h3 id = "noPadding">Introducing LIPS</h3>
+                    <p>This is Love's Internet Programming Shop! This is Love's Internet Programming Shop! This is Love's Internet Programming Shop!
+                    This is Love's Internet Programming Shop! This is Love's Internet Programming Shop! This is Love's Internet Programming Shop!
+                    This is Love's Internet Programming Shop! This is Love's Internet Programming Shop! This is Love's Internet Programming Shop!
+                    This is Love's Internet Programming Shop! This is Love's Internet Programming Shop! This is Love's Internet Programming Shop!
+                    This is Love's Internet Programming Shop! This is Love's Internet Programming Shop! This is Love's Internet Programming Shop!
+                    This is Love's Internet Programming Shop! This is Love's Internet Programming Shop! This is Love's Internet Programming Shop!
+                    This is Love's Internet Programming Shop! This is Love's Internet Programming Shop! This is Love's Internet Programming Shop!
+                    </p>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
